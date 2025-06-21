@@ -27,8 +27,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: setup java
-        uses: actions/setup-java@v4.6.0
+        uses: actions/setup-java@v4
         with:
+          distribution: 'zulu'
           java-version: 17
       - name: greet user
         run: echo "Hello ${{ github.event.inputs.name }}, you are living in ${{ github.event.inputs.city }} and you are ${{ github.event.inputs.isadmin == 'true' && 'an admin' || 'not an admin' }}."
