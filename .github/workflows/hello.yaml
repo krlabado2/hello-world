@@ -1,0 +1,23 @@
+name: workflow hello
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  push:
+    branches:
+      - main
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Hello World
+        run: echo "Hello, World!"
+        
+      - name: Print multiline message
+        run: |
+          echo "This is a multiline message."
+          echo "It can span multiple lines."
+          echo "Each line will be printed separately."
