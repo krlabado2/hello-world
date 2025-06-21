@@ -1,0 +1,31 @@
+# create a worflow for user. steps are 1) greet user with name  and show casethe city example hello krishna you are living in new york and you are not an admin. 
+name: parameters showcase
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+    inputs: # Define inputs for the workflow
+      name:
+        description: 'Name to greet' # textbox input
+        type: string
+        required: true
+        default: 'Krishna'
+      city:
+        description: 'city name' # drop down selection input
+        type: choice
+        options: # predefined options for the dropdown
+          - 'New York'
+          - 'Los Angeles'
+          - 'Chicago'
+      isadmin:
+        description: 'Is the user an admin?' # checkbox input
+        type: boolean
+        default: false
+      
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: greet user
+        run: echo "Hello ${{ github.event.inputs.name }}, you are living in ${{ github.event.inputs.city }} and you are ${{ github.event.inputs.isadmin == 'true' && 'an admin' || 'not an admin' }}."
