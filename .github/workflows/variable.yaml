@@ -1,0 +1,19 @@
+name: variable showcase
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+env:
+  MY_VARIABLE: "Hello, World!"  # Define a variable to be used in the workflow
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Hello World
+        run: echo "${{ env.MY_VARIABLE }}"  # Use the variable defined in env
+      - name: environment variable repo 
+        run: echo ${{ vars.GREET }}  # Use the variable defined in vars
+      - name: docker login
+        run: |
+          docker login -u sharmavijay86 -p ${{ secrets.DPASS }}
